@@ -1,8 +1,12 @@
 mod tm_response;
 
+use std::env;
+
 #[tokio::main]
 async fn main() {
-    get_resale_offers("495231").await;
+    let event_id = env::var("EVENT_ID").expect("EVENT_ID not set");
+    //let discord_webhook = env::var("DISCORD_WEBHOOK").expect("DISCORD_WEBHOOK not set");
+    get_resale_offers(&event_id).await;
 }
 
 async fn get_resale_offers(resale_id: &str) {
