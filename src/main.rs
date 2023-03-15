@@ -20,13 +20,13 @@ async fn get_resale_offers(resale_id: &str) {
         println!("Error: {:?}", res.status());
         return;
     }
-    let tm_res = &res.json::<tm_response::tm_res>().await;
-    if !tm_res.as_ref().is_ok() {
+    let tm_res = &res.json::<tm_response::TMRes>().await;
+    if tm_res.as_ref().is_err() {
         println!("Error: {:?}", tm_res.as_ref().err());
         return;
     }
     let offers = &tm_res.as_ref().unwrap().offers;
-    println!("Found {} offers \n\n", offers.len());
+    println!("Found {} offers \n", offers.len());
     for offer in offers {
         println!(
             "id: {id}\nprice: {price} €\noriginal price: {org_price} €\n",
