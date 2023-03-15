@@ -21,20 +21,20 @@ pub struct offer {
 
 #[derive(Debug, Deserialize)]
 pub struct offer_limit {
-    min: u32,
-    max: u32,
-    multiple: u32,
+    pub min: u32,
+    pub max: u32,
+    pub multiple: u32,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct offer_price {
-    total: u32,
-    original: u32,
-    commission: u32,
+    pub total: u32,
+    pub original: u32,
+    pub commission: u32,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct offer_seller_information {
-    businessType: String,
-    affiliationType: String,
+    pub businessType: String,
+    pub affiliationType: String,
 }
