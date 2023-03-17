@@ -1,16 +1,20 @@
 mod tm_response;
 
-use std::env;
+use std::{collections::HashMap, env};
+
+use reqwest::Body;
+use serde::Serialize;
 
 #[tokio::main]
 async fn main() {
     let event_id = env::var("EVENT_ID").expect("EVENT_ID not set");
-    //let discord_webhook = env::var("DISCORD_WEBHOOK").expect("DISCORD_WEBHOOK not set");
+    let discord_webhook = env::var("DISCORD_WEBHOOK").expect("DISCORD_WEBHOOK not set");
     let current_offers = get_resale_offers(&event_id).await;
     let conn = get_db_conn();
     for offer in current_offers {
         if !is_offer_in_db(&conn, &offer) {
             println!("New offer: {:?}", offer.id);
+            notify_discord_server(&discord_webhook, &offer).await;
             insert_offer_into_db(&conn, &offer);
         } else {
             println!("Offer already exists: {:?}", offer.id);
@@ -66,4 +70,40 @@ fn insert_offer_into_db(conn: &rusqlite::Connection, offer: &tm_response::Offer)
         &[&offer.id, &offer.price.total.to_string()],
     )
     .expect("Failed to insert offer");
+}
+
+#[derive(Debug, Serialize)]
+struct DiscordMessage {
+    username: String,
+    embeds: Vec<DiscordEmbed>,
+}
+
+#[derive(Debug, Serialize)]
+struct DiscordEmbed {
+    title: String,
+    description: String,
+    color: u32,
+}
+
+async fn notify_discord_server(webhook: &str, offer: &tm_response::Offer) {
+    let embed = DiscordEmbed {
+        title: format!("New offer for {}", offer.id),
+        description: format!("Price: {}", offer.price.total),
+        color: 0x00ff00,
+    };
+    let payload = DiscordMessage {
+        username: "Ticketmaster Resale Bot".to_string(),
+        embeds: vec![embed],
+    };
+    let discord_message_json = serde_json::to_string(&payload).unwrap();
+    let client = reqwest::Client::new();
+    let res = client
+        .post(webhook)
+        .header("Content-Type", "application/json")
+        .body(discord_message_json)
+        .send()
+        .await
+        .expect("Failed to send request");
+    println!("Response: {:?}", res.status());
+    println!("{}", res.text().await.unwrap());
 }
