@@ -1,4 +1,5 @@
 # Ticketmaster Notifier
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/mfloto/tmn)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/mfloto/tmn)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mfloto/tmn)
 ![Docker Stars](https://img.shields.io/docker/stars/mfloto/tmn)
