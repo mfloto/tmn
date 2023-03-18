@@ -12,6 +12,10 @@ async fn main() {
     let event_id = env::var("EVENT_ID").expect("EVENT_ID not set");
     let discord_webhook = env::var("DISCORD_WEBHOOK").expect("DISCORD_WEBHOOK not set");
     let country_code = env::var("COUNTRY_CODE").expect("COUNTRY_CODE not set");
+    let threshold_price = env::var("THRESHOLD_PRICE")
+        .unwrap_or("0".to_string())
+        .parse::<u32>()
+        .expect("THRESHOLD_PRICE is not a number");
 
     let current_offers = get_resale_offers(&event_id, &country_code).await;
     // Compare online offers with offers in database
@@ -21,7 +25,10 @@ async fn main() {
             println!("Offer already exists: {:?}", offer.id);
         } else {
             println!("New offer: {:?}", offer.id);
-            notify_discord_server(&discord_webhook, &offer).await;
+            if threshold_price == 0 || offer.price.total <= threshold_price {
+                println!("Price is below threshold. Sending notification...");
+                notify_discord_server(&discord_webhook, &offer).await;
+            }
             insert_offer_into_db(&conn, &offer);
         }
     }
