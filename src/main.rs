@@ -15,7 +15,8 @@ async fn main() {
     let threshold_price = env::var("THRESHOLD_PRICE")
         .unwrap_or("0".to_string())
         .parse::<u32>()
-        .expect("THRESHOLD_PRICE is not a number");
+        .expect("THRESHOLD_PRICE is not a number")
+        * 100;
 
     let current_offers = get_resale_offers(&event_id, &country_code).await;
     // Compare online offers with offers in database
