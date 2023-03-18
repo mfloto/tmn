@@ -74,7 +74,7 @@ fn is_offer_in_db(conn: &rusqlite::Connection, offer: &Offer) -> bool {
     let mut stmt = conn
         .prepare("SELECT 1 FROM offers WHERE id = ?")
         .expect("Failed to prepare statement");
-    stmt.exists(&[&offer.id])
+    stmt.exists([&offer.id])
         .expect("Failed to execute statement")
 }
 
@@ -82,7 +82,7 @@ fn is_offer_in_db(conn: &rusqlite::Connection, offer: &Offer) -> bool {
 fn insert_offer_into_db(conn: &rusqlite::Connection, offer: &Offer) {
     conn.execute(
         "INSERT INTO offers (id, price) VALUES (?1, ?2)",
-        &[&offer.id, &offer.price.total.to_string()],
+        [&offer.id, &offer.price.total.to_string()],
     )
     .expect("Failed to insert offer");
 }
