@@ -57,7 +57,7 @@ async fn get_resale_offers(resale_id: &str, country_code: &str) -> Vec<Offer> {
 
 /// Creates a new database connection and creates the offers table if it does not exist
 fn get_db_conn() -> rusqlite::Connection {
-    let conn = rusqlite::Connection::open("resale.db").expect("Failed to open database");
+    let conn = rusqlite::Connection::open("/data/resale.db").expect("Failed to open database");
     conn.execute(
         "CREATE TABLE IF NOT EXISTS offers (
                   id              TEXT PRIMARY KEY,
