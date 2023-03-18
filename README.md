@@ -14,3 +14,4 @@ Befor running the binary, set the following environment variables:
 | EVENT_ID        | Ticketmaster id of the event. Format depends on your Ticketmaster region.                 |
 | COUNTRY_CODE    | Country code of your Ticketmaster region (e.g. DE for Germany or NL for the Netherlands). |
 | DISCORD_WEBHOOK | Webhook url for the channel you want use for ticket-notifications.                        |
+| THRESHOLD_PRICE | Maximum price for a ticket. Tickets above that price won't trigger a notification.        |
