@@ -4,7 +4,7 @@ Get notified about resale tickets on ticketmaster (EU)
 ## TODO
 - [X] make url variable for different TM_regions
 - [ ] better error handling
-- [ ] rewrite discord notification
+- [X] rewrite discord notification
 
 ## How to use
 Befor running the binary, set the following environment variables:
