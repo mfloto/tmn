@@ -33,7 +33,7 @@ pub(crate) async fn notify_discord_server(webhook: &str, offer: &Offer) {
         color: 0x000000,
     };
     let payload = DiscordMessage {
-        username: "Ticketmaster Resale Bot".to_string(),
+        username: "Resale Bot".to_string(),
         embeds: vec![embed],
     };
     let discord_message_json = serde_json::to_string(&payload).unwrap();
