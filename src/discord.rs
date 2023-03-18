@@ -22,9 +22,15 @@ struct DiscordEmbed {
 pub(crate) async fn notify_discord_server(webhook: &str, offer: &Offer) {
     // Construct Discord webhook payload
     let embed = DiscordEmbed {
-        title: format!("New offer for {}", offer.id),
-        description: format!("Price: {}", offer.price.total),
-        color: 0x00ff00,
+        title: "New ticket available".to_string(),
+        description: format!(
+            "Id: {}\nPrice: {}€\nOriginal price: {}€\nRestrictions: {}",
+            offer.id,
+            offer.price.total / 100,
+            offer.price.original / 100,
+            offer.restrictions.join(", ")
+        ),
+        color: 0x000000,
     };
     let payload = DiscordMessage {
         username: "Ticketmaster Resale Bot".to_string(),
