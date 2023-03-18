@@ -1,4 +1,8 @@
 # Ticketmaster Notifier
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/mfloto/tmn)
+![Docker Pulls](https://img.shields.io/docker/pulls/mfloto/tmn)
+![Docker Stars](https://img.shields.io/docker/stars/mfloto/tmn)
+<br>
 Get notified about resale tickets on ticketmaster (EU)
 
 ## TODO
