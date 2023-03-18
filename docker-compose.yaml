@@ -1,0 +1,14 @@
+services:
+  tmn:
+    image: mfloto/tmn
+    volumes:
+      - tmn_data:/data
+    restart: unless-stopped
+    environment:
+      - EVENT_ID=
+      - COUNTRY_CODE=
+      - DISCORD_WEBHOOK=
+      - THRESHOLD_PRICE=
+
+volumes:
+  tmn_data:
