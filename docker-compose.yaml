@@ -4,11 +4,8 @@ services:
     volumes:
       - tmn_data:/data
     restart: unless-stopped
-    environment:
-      - EVENT_ID=
-      - COUNTRY_CODE=
-      - DISCORD_WEBHOOK=
-      - THRESHOLD_PRICE=
+    env_file:
+      - variables.env
 
 volumes:
   tmn_data:
