@@ -37,7 +37,6 @@ async fn main() {
 
 //TODO: return Result
 async fn get_resale_offers(resale_id: &str, country_code: &str) -> Vec<Offer> {
-    //TODO: make url configurable (e.g. for other countries)
     let res = reqwest::get(format!(
         "https://availability.ticketmaster.eu/api/v2/TM_{country_code}/resale/{resale_id}"
     ))
