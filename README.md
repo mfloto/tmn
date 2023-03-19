@@ -9,7 +9,7 @@ Get notified about resale tickets on ticketmaster (EU)
 ![](https://github.com/mfloto/tmn/blob/main/assets/tmn_mt_sample.png?raw=true)
 
 ## How to use
-To get the project up and running quickly, use the `docker-compose.yaml` and edit the `varaibles.env`, then run `docker compose up -d`.
+To get the project up and running quickly, use the `docker-compose.yaml` and edit the `variables.env`, then run `docker compose up -d`.
 
 | var             | description                                                                               |
 |-----------------|-------------------------------------------------------------------------------------------|
