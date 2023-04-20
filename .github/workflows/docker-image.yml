@@ -21,7 +21,7 @@ jobs:
       run: rustup target add x86_64-unknown-linux-musl
     -
       name: Install OpenSSL
-      run: apt install libssl-dev
+      run: sudo apt install -y libssl-dev
     -
       name: Build binary
       run: cargo build --release --target x86_64-unknown-linux-musl
