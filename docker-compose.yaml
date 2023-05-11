@@ -5,7 +5,7 @@ services:
       - tmn_data:/data
     restart: unless-stopped
     env_file:
-      - variables.env
+      - .env
 
 volumes:
   tmn_data:

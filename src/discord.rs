@@ -1,7 +1,7 @@
+use crate::tm_response::Offer;
+use color_eyre::Result;
 use reqwest::Client;
 use serde::Serialize;
-
-use crate::tm_response::Offer;
 
 /// Discord webhook payload
 #[derive(Debug, Serialize)]
@@ -19,7 +19,7 @@ struct DiscordEmbed {
 }
 
 /// Sends a message via a Discord webhook
-pub(crate) async fn notify_discord_server(webhook: &str, offer: &Offer) {
+pub(crate) async fn notify_discord_server(webhook: &str, offer: &Offer) -> Result<()> {
     // Construct Discord webhook payload
     let embed = DiscordEmbed {
         title: "New ticket available".to_string(),
@@ -36,7 +36,7 @@ pub(crate) async fn notify_discord_server(webhook: &str, offer: &Offer) {
         username: "Resale Bot".to_string(),
         embeds: vec![embed],
     };
-    let discord_message_json = serde_json::to_string(&payload).unwrap();
+    let discord_message_json = serde_json::to_string(&payload)?;
     // Send request
     let client = Client::new();
     let _ = client
@@ -44,6 +44,6 @@ pub(crate) async fn notify_discord_server(webhook: &str, offer: &Offer) {
         .header("Content-Type", "application/json")
         .body(discord_message_json)
         .send()
-        .await
-        .expect("Failed to send request");
+        .await?;
+    Ok(())
 }
