@@ -7,7 +7,6 @@ use crate::discord::notify_discord_server;
 use crate::tm_response::{Offer, TMRes};
 use color_eyre::eyre::Context;
 use color_eyre::{Result, Report, Help};
-use core::fmt::Error;
 
 #[tokio::main]
 async fn main() -> Result<()> {
