@@ -1,3 +1,4 @@
+🚧 Because of changes to the Ticketmaster API requiring a `reese84` token, this project does not work at the moment! [Issue](https://github.com/mfloto/tmn/issues/5) 🚧
 # Ticketmaster Notifier
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/mfloto/tmn)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/mfloto/tmn)
@@ -30,6 +31,7 @@ docker build -t tmn . --no-cache
 ```
 
 ## TODO
+- [ ] `listingId` is now a string
 - [X] make url variable for different TM_regions
 - [X] better error handling
 - [X] rewrite discord notification
